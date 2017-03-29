@@ -145,10 +145,11 @@ class RevBayesEngine(object):
         cmd = self.executable
         # Interactive mode prevents crashing on Windows on syntax errors.
         # Delay sourcing the "~/.octaverc" file in case it displays a pager.
-        orig_prompt = u('> ')
-        change_prompt = u('+ ')
+        
+        repl = REPLWrapper(cmd_or_spawn=cmd,
+                           prompt_regex=r'[>+] ',
+                           prompt_change_cmd=None)
 
-        repl = REPLWrapper(cmd, orig_prompt, change_prompt)
         if os.name == 'nt':
             repl.child.crlf = '\n'
         repl.interrupt = self._interrupt
