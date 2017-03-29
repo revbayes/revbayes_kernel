@@ -45,7 +45,9 @@ class RevBayesKernel(ProcessMetaKernel):
         return {'mimetype': 'text/x-rsrc',
                 'name': 'RevBayes',
                 'file_extension': '.Rev',
-                'help_links': HELP_LINKS}
+                'help_links': HELP_LINKS,
+                'pygments_lexer': 'R',
+                'codemirror_mode': {'name': 'r' }}
 
     @property
     def banner(self):

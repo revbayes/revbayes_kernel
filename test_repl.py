@@ -1,15 +1,9 @@
-import pexpect.replwrap
-import re
-
 from metakernel import REPLWrapper
 
-
-
-change_prompt = None
-prompt_cmd = 'printf("> ")'
 x = REPLWrapper(cmd_or_spawn='/usr/local/bin/rb',
                 prompt_regex=r'[>+] ',
-                prompt_change_cmd=None)
+                prompt_change_cmd=None,
+                echo=True)
 
 x.run_command('x <- [1,')
 x.run_command('2]')
