@@ -209,8 +209,8 @@ class RevBayesEngine(object):
         """
         executable = None
         if not executable or not which(executable):
-            if which('rb'):
-                executable = 'rb'
+            if which('rb-jupyter'):
+                executable = 'rb-jupyter'
             else:
                 msg = ('RevBayes Executable not found, please add to path')
                 raise OSError(msg)
