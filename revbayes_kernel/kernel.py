@@ -149,7 +149,7 @@ class RevBayesEngine(object):
         # Delay sourcing the "~/.octaverc" file in case it displays a pager.
         
         repl = REPLWrapper(cmd_or_spawn=cmd,
-                           prompt_regex=r'[>+] ',
+                           prompt_regex=r'[>+] $',
                            prompt_change_cmd=None)
 
         if os.name == 'nt':
