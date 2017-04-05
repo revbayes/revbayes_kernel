@@ -45,7 +45,9 @@ class RevBayesKernel(ProcessMetaKernel):
         return {'mimetype': 'text/x-rsrc',
                 'name': 'RevBayes',
                 'file_extension': '.Rev',
-                'help_links': HELP_LINKS}
+                'help_links': HELP_LINKS,
+                'pygments_lexer': 'R',
+                'codemirror_mode': {'name': 'r' }}
 
     @property
     def banner(self):
@@ -147,7 +149,7 @@ class RevBayesEngine(object):
         # Delay sourcing the "~/.octaverc" file in case it displays a pager.
         
         repl = REPLWrapper(cmd_or_spawn=cmd,
-                           prompt_regex=r'[>+] ',
+                           prompt_regex=r'[>+] $',
                            prompt_change_cmd=None)
 
         if os.name == 'nt':
@@ -207,8 +209,8 @@ class RevBayesEngine(object):
         """
         executable = None
         if not executable or not which(executable):
-            if which('rb'):
-                executable = 'rb'
+            if which('rb-jupyter'):
+                executable = 'rb-jupyter'
             else:
                 msg = ('RevBayes Executable not found, please add to path')
                 raise OSError(msg)
