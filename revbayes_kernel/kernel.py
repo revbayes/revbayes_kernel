@@ -207,12 +207,14 @@ class RevBayesEngine(object):
     def _get_executable(self):
         """Find the best RevBayes executable.
         """
-        executable = None
+        executable = os.environ.get('REVBAYES_JUPYTER_EXECUTABLE', None)
         if not executable or not which(executable):
             if which('rb-jupyter'):
                 executable = 'rb-jupyter'
             else:
-                msg = ('RevBayes Executable not found, please add to path')
+                msg = ('RevBayes Executable not found, please add to path or set',
+                       '\"REVBAYES_JUPYTER_EXECUTABLE\" environment variable.',
+                       'See README.md for instructions to build rb-jupyter.')
                 raise OSError(msg)
         executable = executable.replace(os.path.sep, '/')
         return executable
