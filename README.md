@@ -14,12 +14,12 @@ The `rb-jupyter` binary must be found using the `which` command or be located us
 
 ### Example notebooks
 
-Notebook demo for simple MCMC analysis
+Notebook demo for simple MCMC analysis [[preview](https://nbviewer.jupyter.org/github/revbayes/revbayes_kernel/blob/master/revbayes_mcmc_demo.ipynb)]
 ```sh
 jupyter notebook revbayes_mcmc_demo.ipynb
 ```
 
-Notebook demo for jupyter magics (some RevBayes-python-R interoperability)
+Notebook demo for jupyter magics (some RevBayes-python-R interoperability) [[preview](https://nbviewer.jupyter.org/github/revbayes/revbayes_kernel/blob/master/revbayes_magic_demo.ipynb)]
 ```sh
 jupyter notebook revbayes_magic_demo.ipynb
 ```
