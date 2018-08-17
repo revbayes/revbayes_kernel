@@ -6,6 +6,7 @@ A Jupyter kernel for RevBayes
 ```sh
 sudo python3 setup.py install
 python3 -m revbayes_kernel.install
+pip3 install metakernel
 ```
 
 The current version of `revbayes_kernel` calls the RevBayes executable named `rb-jupyter`. Support to compile `rb-jupyter` with the command `./projects/cmake/build.sh -jupyter true` was added to the development branch of the main [RevBayes](https://github.com/revbayes/revbayes) repository in commit [6028eb2](https://github.com/revbayes/revbayes/commit/6028eb2925e2910a839e98060768401843a87362).
