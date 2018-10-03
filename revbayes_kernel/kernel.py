@@ -140,8 +140,8 @@ class RevBayesEngine(object):
                 raise e
 
     def _startup(self):
-        here = os.path.realpath(os.path.dirname(__file__))
-        self.eval('setwd("%s")' % here.replace(os.path.sep, '/'))
+        here = os.path.dirname(os.path.realpath(__file__))
+        self.eval('os.chdir("%s")' % here)
 
     def _create_repl(self):
         cmd = self.executable
@@ -158,6 +158,11 @@ class RevBayesEngine(object):
         # Remove the default 50ms delay before sending lines.
         repl.child.delaybeforesend = None
         return repl
+    def do_complete(self, code, cursor_pos):
+        return {'status': 'ok',
+             'cursor_start': ...,
+             'cursor_end': ...,
+             'matches': [...]}
 
     def _interrupt(self, silent=False):
         if (os.name == 'nt'):
