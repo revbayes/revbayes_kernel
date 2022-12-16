@@ -145,6 +145,8 @@ class RevBayesEngine(object):
 
     def _create_repl(self):
         exec_name = os.path.split(self.executable)[-1]
+        if exec_name == 'exe':
+            exec_name = os.path.split(self.executable)[-2]
         if exec_name == 'rb-jupyter':
             cmd = self.executable
         else:
