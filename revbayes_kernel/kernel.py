@@ -144,9 +144,12 @@ class RevBayesEngine(object):
         self.eval('os.chdir("%s")' % here)
 
     def _create_repl(self):
-
-        cmd_string = self.executable + ' --jupyter'
-        cmd = cmd_string
+        exec_name = os.path.split(self.executable)[-1]
+        if exec_name == 'rb-jupyter':
+            cmd = self.executable
+        else:
+            cmd_string = self.executable + ' --jupyter'
+            cmd = cmd_string
         # Interactive mode prevents crashing on Windows on syntax errors.
         # Delay sourcing the "~/.octaverc" file in case it displays a pager.
 
