@@ -69,7 +69,7 @@ class RevBayesKernel(ProcessMetaKernel):
         """
         return self.revbayes_engine.repl
 
-    def do_execute_direct(self, code, silent=False):
+    def do_execute_direct(self, code, silent=False, allow_stdin=True):
         if code.strip() in ['q()', 'quit()']:
             self._revbayes_engine = None
             self.do_shutdown(True)
@@ -115,7 +115,7 @@ class RevBayesEngine(object):
         self.stdin_handler = stdin_handler
         self._startup()
 
-    def eval(self, code, timeout=None, silent=False):
+    def eval(self, code, timeout=None, silent=False, allow_stdin=True):
         """Evaluate code using the engine.
         """
         stream_handler = None if silent else self.stream_handler
@@ -144,10 +144,12 @@ class RevBayesEngine(object):
         self.eval('os.chdir("%s")' % here)
 
     def _create_repl(self):
-        cmd = self.executable
+
+        cmd_string = self.executable + ' --jupyter'
+        cmd = cmd_string
         # Interactive mode prevents crashing on Windows on syntax errors.
         # Delay sourcing the "~/.octaverc" file in case it displays a pager.
-        
+
         repl = REPLWrapper(cmd_or_spawn=cmd,
                            prompt_regex=r'[>+] $',
                            prompt_change_cmd=None)
@@ -214,8 +216,8 @@ class RevBayesEngine(object):
         """
         executable = os.environ.get('REVBAYES_JUPYTER_EXECUTABLE', None)
         if not executable or not which(executable):
-            if which('rb-jupyter'):
-                executable = 'rb-jupyter'
+            if which('rb'):
+                executable = 'rb'
             else:
                 msg = ('RevBayes Executable not found, please add to path or set',
                        '\"REVBAYES_JUPYTER_EXECUTABLE\" environment variable.',
